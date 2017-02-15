@@ -4,7 +4,7 @@
 
 start() ->
   receive
-    {bind, Processes} -> wait_task(Neighbours)
+    {bind, Processes} -> wait_task(Processes)
   end.
 
 wait_task(Processes) ->
@@ -18,7 +18,7 @@ send_messages(task_1, Processes, Max_messages, Max_messages, Counts) when Max_me
   receive
     timeout ->
       print_counts(Processes, Counts),
-      wait_task(Processes);
+      ok;
     {hello, Pid} ->
       send_messages(task_1, Processes, Max_messages, Max_messages, received_message(Pid, Counts))
   end;
@@ -26,7 +26,7 @@ send_messages(task_1, Processes, Messages_sent, Max_messages, Counts) ->
   receive
     timeout ->
       print_counts(Processes, Counts),
-      wait_task(Processes);
+      ok;
     {hello, Pid} ->
       send_messages(task_1, Processes, Messages_sent, Max_messages, received_message(Pid, Counts))
   after 0 -> ok
