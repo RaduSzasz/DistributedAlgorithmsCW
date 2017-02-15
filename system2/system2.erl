@@ -6,11 +6,12 @@ start() ->
   N = 5,
   Max_messages = 100,
   Timeout = 1000,
-  [spawn(process, start, [self()]) || _ <- lists:seq(1, N)],
+  [spawn(process, start, [self(), Idx]) || Idx <- lists:seq(1, N)],
   PLs = collect_PLs(0, N, []),
-  [PL ! {hello, self(), {task1, start, Max_messages, Timeout}} || PL <- PLs]
+  [PL ! {hello, self(), {task1, start, Max_messages, Timeout}} || PL <- PLs].
 
 collect_PLs(Expected, Expected, PLs) ->
+  io:format("~p~n", [PLs]),
   [PL ! {hello, self(), {bind, PLs}} || PL <- PLs],
   PLs;
 collect_PLs(Received, Expected, PLs) ->
