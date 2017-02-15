@@ -41,6 +41,21 @@
 % '4': "{162781, 0} {162781, 0} {162781, 0} {162781, 0} {162781, 0}"
 % '1': "{210054, 0} {210054, 0} {210054, 0} {210054, 0} {210054, 0}"
 % '2': "{186575, 0} {186575, 0} {186575, 0} {186575, 0} {186575, 0}"
+%
+% Firstly, it is important to note that we have a good indication of correctness
+% due to the fact that when reliability was 0, no messages were received, but when
+% reliability was 100, we had all the messages received in the bounded case and
+% a number of messages similar to the one in system3 for the unbounded case.
+% In the same fashion, the bounded case for reliability 50 seems to indicate
+% that our solution is correct, all the received counts averaging around 50.
+%
+% Interestingly, the number of messages received when reliability is only 50
+% is way higher than the case when reliability is 100. The explanation however
+% is fairly straightforward. The main factor limiting the number of message received
+% by our applications was the fact that throughout all of the communication layers,
+% we chose to prioritize sending. In the case when the reliability is only 50 percent,
+% we are less busy sending as we are dropping half of our messages, but there are still
+% plenty of received messages for us to process.
 -module(system4).
 -export([start/0]).
 
