@@ -4,9 +4,8 @@
 -export([start/2]).
 
 start(System, Id) ->
-  AtomId = list_to_atom(integer_to_list(Id)),
-  register(AtomId, self()),
-  System ! {pl_setup, AtomId},
+  register(Id, self()),
+  System ! {pl_setup, Id},
   receive
     {bind, C} -> next(C)
   end.

@@ -3,6 +3,7 @@
 -module(process).
 -export([start/2]).
 
-start(System, Id) ->
+start(System, IntId) ->
+  Id = list_to_atom(integer_to_list(IntId)),
   PL = spawn(pl, start, [System, Id]),
   PL ! {bind, spawn(app, start, [PL, Id])}.

@@ -27,13 +27,13 @@ send_messages(task_1, PL, Id, Neighbours, Messages_sent, Max_messages, Counts) -
     timeout ->
       print_counts(Id, Neighbours, Counts),
       wait_task(PL, Id, Neighbours);
-    {hello, Pid} ->
+    {pl_deliver, _, {hello, Pid}} ->
       send_messages(task_1, PL, Id, Neighbours, Messages_sent, Max_messages, received_message(Pid, Counts))
   after 0 -> ok
   end,
 
   NewCounts = lists:foldr(fun(Process, TempCounts) ->
-                              PL ! {pl_send, Process, {hello, self()}},
+                              PL ! {pl_send, Process, {hello, Id}},
                               sent_message(Process, TempCounts)
                           end, Counts, Neighbours),
 
