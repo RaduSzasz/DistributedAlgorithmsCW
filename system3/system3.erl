@@ -13,6 +13,13 @@
 % '3': "{168332, 4229} {168332, 3735} {168332, 6883} {168332, 2542} {168332, 4133}"
 % '2': "{179581, 199} {179581, 331} {179581, 3139} {179581, 257} {179581, 421}"
 % '5': "{230260, 2524} {230260, 2021} {230260, 4802} {230260, 1637} {230260, 2345}"
+%
+% For the unbounded case, the gap in between the messages sent and those received
+% grew even further. Again, this is due to the fact that the message telling the
+% beb layer to send a message has priority over the messages received from the pl
+% layer.
+%
+% There is not much to be said about the bounded case.
 -module(system3).
 -export([start/0]).
 

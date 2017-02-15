@@ -18,7 +18,7 @@ send_messages(task_1, BEB, Id, Processes, Max_messages, Max_messages, Counts) wh
   receive
     timeout ->
       print_counts(Id, Processes, Counts),
-      wait_task(BEB, Id, Processes);
+      ok;
     {beb_deliver, _, {hello, Pid}} ->
       send_messages(task_1, BEB, Id, Processes, Max_messages, Max_messages, received_message(Pid, Counts))
   end;
@@ -26,7 +26,7 @@ send_messages(task_1, BEB, Id, Processes, Messages_sent, Max_messages, Counts) -
   receive
     timeout ->
       print_counts(Id, Processes, Counts),
-      wait_task(BEB, Id, Processes);
+      ok;
     {beb_deliver, _, {hello, Pid}} ->
       send_messages(task_1, BEB, Id, Processes, Messages_sent, Max_messages, received_message(Pid, Counts))
   after 0 -> ok
