@@ -1,6 +1,6 @@
 .SUFFIXES: .erl .beam
 
-MODULES = system1
+MODULES = system1 process
 
 ERLC = 	erlc -o ebin
 
@@ -16,5 +16,5 @@ L_ERL = erl -noshell -pa ebin psetcookie pass
 
 
 SYSTEM = system1
-run1: 	all
+run: 	all
 	$(L_ERL) -s $(SYSTEM) start
