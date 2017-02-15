@@ -30,7 +30,6 @@ start() ->
           PL <- PLs].
 
 collect_PLs(Expected, Expected, PLs) ->
-  io:format("~p~n", [PLs]),
   [PL ! {hello, self(), {bind, PLs}} || PL <- PLs],
   PLs;
 collect_PLs(Received, Expected, PLs) ->
